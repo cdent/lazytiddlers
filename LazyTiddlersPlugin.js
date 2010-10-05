@@ -17,14 +17,16 @@
         store.setDirty(dirty);
     };
 
-    var adaptor = store.getTiddler('LazyTiddlers').getAdaptor();
-    var tiddlers = store.getTiddlerText('LazyTiddlers').split("\n");
+    try {
+        var adaptor = store.getTiddler('LazyTiddlers').getAdaptor();
+        var tiddlers = store.getTiddlerText('LazyTiddlers').split("\n");
 
-    $.each(tiddlers, function(i, tiddler) {
-        var tiddler_info = tiddler.split(":");
-        var context = {workspace: "bags/" + tiddler_info[0]};
-        adaptor.getTiddler(tiddler_info[1], context, null, callback);
-    });
+        $.each(tiddlers, function(i, tiddler) {
+            var tiddler_info = tiddler.split(":");
+            var context = {workspace: "bags/" + tiddler_info[0]};
+            adaptor.getTiddler(tiddler_info[1], context, null, callback);
+        });
+    } catch(err) {} // Unable to get LazyTiddlers, don't do anything
 
 })(jQuery);
 //}}}
