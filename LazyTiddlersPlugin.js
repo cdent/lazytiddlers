@@ -23,8 +23,10 @@
 
         $.each(tiddlers, function(i, tiddler) {
             var tiddler_info = tiddler.split(":");
-            var context = {workspace: "bags/" + tiddler_info[0]};
-            adaptor.getTiddler(tiddler_info[1], context, null, callback);
+            var bag = tiddler_info.shift();
+            var title = tiddler_info.join(":");
+            var context = {workspace: "bags/" + bag};
+            adaptor.getTiddler(title, context, null, callback);
         });
     } catch(err) {} // Unable to get LazyTiddlers, don't do anything
 
