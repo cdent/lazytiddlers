@@ -18,14 +18,16 @@
     };
 
     try {
-        var adaptor = store.getTiddler('LazyTiddlers').getAdaptor();
-        var tiddlers = store.getTiddlerText('LazyTiddlers').split("\n");
+        var tiddler = store.getTiddler('LazyTiddlers');
+        var adaptor = tiddler.getAdaptor();
+        var tiddlers = tiddler.text.split("\n");
+        var host = adaptor.fullHostName(tiddler.fields["server.host"]);
 
         $.each(tiddlers, function(i, tiddler) {
             var tiddler_info = tiddler.split(":");
             var bag = tiddler_info.shift();
             var title = tiddler_info.join(":");
-            var context = {workspace: "bags/" + bag};
+            var context = {workspace: "bags/" + bag, host: host};
             adaptor.getTiddler(title, context, null, callback);
         });
     } catch(err) {} // Unable to get LazyTiddlers, don't do anything
