@@ -13,7 +13,7 @@
         store.setDirty(false);
         store.saveTiddler(tiddler.title, tiddler.title, tiddler.text,
             tiddler.modifier, tiddler.modified, tiddler.tgags, tiddler.fields,
-            false, tiddler.created, tiddler.creator);
+            true, tiddler.created, tiddler.creator);
         store.setDirty(dirty);
     };
 
